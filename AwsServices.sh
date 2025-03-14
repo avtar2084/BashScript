@@ -41,3 +41,8 @@ then
 	exit 1
 fi
 
+# Check if the AWS CLI is configured
+if [ ! -d ~/.aws ]; then
+    echo "AWS CLI is not configured. Please configure the AWS CLI and try again."
+    exit 1
+fi

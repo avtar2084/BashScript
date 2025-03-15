@@ -41,3 +41,55 @@ then
 	exit 1
 fi
 
+case $2 in
+	ec2)
+		aws ec2 describe-instances --region $1
+		;;
+	rds)
+		aws rds describe-db-instances --region $1
+		;;
+	s3)
+		aws s3api list-buckets --region $1
+		;;
+	cloudfront)
+		aws cloudfront list-distributions --region $1
+		;;
+	vpc)
+		aws ec2 describe-vpcs --region $1
+		;;
+	iam)
+		aws iam list-users --region $1
+		;;
+	route53)
+		aws route53 list-hosted-zones --region $1
+		;;
+	cloudwatch)
+		aws cloudwatch list-metrics --region $1
+		;;
+	cloudformation)
+		aws cloudformation list-stacks --region $1
+		;;
+	lambda)
+		aws lambda list-functions --region $1
+		;;
+	sns)
+		aws sns list-topics --region $1
+		;;
+	sqs)
+		aws sqs list-queues --region $1
+		;;
+	dynamodb)
+		aws dynamodb list-tables --region $1
+		;;
+	vpc)
+		aws ec2 describe-vpcs --region $1
+		;;
+	ebs)
+		aws ec2 describe-volumes --region $1
+		;;
+	*)
+		echo "The service is not supported by this script"
+		;;
+esac
+
+

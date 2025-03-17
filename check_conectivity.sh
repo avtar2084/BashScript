@@ -23,8 +23,8 @@ fi
 #ping to the host
 if ping -c 1 $Host_name &> /dev/null
 then
-	echo "connection established + $date" >> $Output_file
+	echo "connection established at $(date)"   >> $Output_file
 else
-	echo "connection failed  + $date" >> $Output_file
+	echo "connection failed  at $(date)" >> $Output_file
 fi
 

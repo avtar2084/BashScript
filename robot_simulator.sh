@@ -35,7 +35,8 @@ do
 	#echo "$i"
 	firstchar=`echo "$comm" | cut -c${i}`
 	case $firstchar in
-		A) echo "advance"
+		A) 
+		#echo "advance"
 		((y++));;
 		R) echo "right"
 		((x++));;

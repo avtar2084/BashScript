@@ -8,6 +8,10 @@ jobs:
         run: echo "Hello World!"
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: extract git commit data
+        uses: lespinasse/git-commit-date-action@v1.x
+      - name: Update author information
+        uses: 'echo ${{ env.GIT_COMMIT_AUTHOR_NAME }} > AUTHOR'
       - name: Raise PR
         id: demo-1
         uses: peter-evans/create-pull-request@v3

@@ -1,5 +1,8 @@
-name: hello-world
-'on': push
+name: Creat-Merge-PR
+'on':
+  push:
+    branches:
+      - new
 jobs:
   my-job:
     runs-on: ubuntu-latest
@@ -25,4 +28,26 @@ jobs:
             }}>
           body: This is to show automatic PR creation
           token: '${{ secrets.GITHUB_TOKEN }}'
-          delete-branch: true
+      - name: Run the Action
+        uses: devops-infra/action-pull-request@master
+        with:
+          github_token: '${{ secrets.GITHUB_TOKEN }}'
+          source_branch: new
+          target_branch: main
+          title: My pull request
+          body: '**Automated pull request**'
+      - name: Find Pull Request
+        uses: juliangruber/find-pull-request-action@v1
+        id: find-pull-request
+        with:
+          branch: new
+      - run: 'echo "Pull Request ${number} (${sha})"'
+        env:
+          number: '${{ steps.find-pull-request.outputs.number }}'
+          sha: '${{ steps.find-pull-request.outputs.head-sha }}'
+      - name: Merge Pull Request
+        uses: juliangruber/merge-pull-request-action@v1
+        with:
+          github-token: '${{ secrets.GITHUB_TOKEN }}'
+          number: '${{ steps.find-pull-request.outputs.number }}'
+          method: squash
